@@ -93,7 +93,7 @@ def keyDownC(keyName):
 		print("unknown key %s" % keyName)
 		return
 	return action
-renderer.window.setKeyDownCb(keyDownCb)
+#renderer.window.setKeyDownCb(keyDownCb)
 """
 The main actor in A3C framwork will be the brain
 This will also provide the neccessary network for the 
@@ -194,9 +194,11 @@ class Worker(threading.Thread):
 				count=count+1
 			local_ppo.env.seed(2)
 			observation = local_ppo.env.reset()
+			observation = observation["image"]
 			observation_copy = observation
 			local_ppo.env.seed(2)
 			old_observation=local_ppo.env.reset()
+			old_observation = old_observation["image"]
 			old_observation_copy = old_observation
 			totalreward = 0
 			flag =False
@@ -224,10 +226,11 @@ class Worker(threading.Thread):
 				action_taken[action_take]=1
 				self.actions.append(action_taken)
 				action_dummy = action_take
-				action_take=keyDownC(action_take)
+				#action_take=keyDownC(action_take)
 				old_observation=observation
 				old_observation_copy=observation_copy
 				observation,reward,done,info=local_ppo.env.step(action_take)
+				observation = observation["image"]
 				#local_ppo.env.render('human')
 				observation_copy = observation
 				number=0
