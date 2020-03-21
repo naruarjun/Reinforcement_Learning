@@ -52,9 +52,7 @@ def run_episode(env,policy_grad,value_grad,sess,train_writer):
 	p1_prob,p1_state,p1_action,p1_how_good,p1_optimizer,p1_loss,p1_params,p1_merged = policy_grad
 	v1_state,v1_pred_value,v1_value,v1_optimizer = value_grad
 	observation = env.reset()
-	observation = observation["image"]
 	old_observation=env.reset()
-	old_observation = old_observation["image"]
 	transition = []
 	states = []
 	rewards = []
@@ -79,7 +77,6 @@ def run_episode(env,policy_grad,value_grad,sess,train_writer):
 		actions.append(action_taken)
 		old_observation=observation
 		observation,reward,done,info=env.step(action_take)
-		observation = observation["image"]
 		env.render()
 		transitions.append((old_observation,reward,action_take))
 		totalreward+=reward
