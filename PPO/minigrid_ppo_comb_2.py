@@ -148,7 +148,7 @@ def keyDownC(keyName):
 		print("unknown key %s" % keyName)
 		return
 	return action
-renderer.window.setKeyDownCb(keyDownCb)
+#renderer.window.setKeyDownCb(keyDownCb)
 policy_grad = policy_gradient()
 saver = tf.train.Saver()
 with tf.Session() as sess:
@@ -168,9 +168,11 @@ with tf.Session() as sess:
 			p1_prob,p1_state,p1_action,p1_how_good,p1_optimizer,p1_loss,p1_params,p1_stata,p1_prob_ratio,p1_good_probabilities,p1_inde,v1_pred_value,v1_value,v1_optimizer,v1_loss,p1_summary_op = policy_grad
 			env.seed(2)
 			observation = env.reset()
+			observation = observation["image"]
 			observation_copy = observation
 			env.seed(2)
 			old_observation=env.reset()
+			old_observation = old_observation["image"]
 			old_observation_copy = old_observation
 			transition = []
 			states = []
@@ -227,6 +229,7 @@ with tf.Session() as sess:
 				old_observation=observation
 				old_observation_copy=observation_copy
 				observation,reward,done,info=env.step(action_take)
+				observation = observation["image"]
 				env.render('human')
 				observation_copy = observation
 				number=0
