@@ -7,5 +7,5 @@ The implementations include
 
 * For running the experiments-
   * Install [gym](http://gym.openai.com/docs/)
-  * Install [gym-minigrid](https://github.com/maximecb/gym-minigrid) using `pip install gym-minigrid`
+  * Install [gym-minigrid](https://github.com/maximecb/gym-minigrid) using `pip3 install gym-minigrid`
   * Install [Tensorflow 1](https://www.tensorflow.org/install/pip)
